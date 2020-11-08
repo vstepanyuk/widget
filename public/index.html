@@ -25,17 +25,47 @@
       Learn how to configure a non-root public URL by running `npm run build`.
     -->
     <title>Subscription test</title>
+    <style>
+      .hidden {
+        display: none
+      }
+    </style>
   </head>
   <body>
+
+    <script>
+      function swap(value) {
+        document.getElementById('root' + value).classList.remove('hidden')
+        document.getElementById('root' + (1 - value)).classList.add('hidden')
+      }
+    </script>
+
     <noscript>You need to enable JavaScript to run this app.</noscript>
-    <div id="root"></div>
+
+    <button onclick="swap(0)">Monthly</button>
+    <button onclick="swap(1)">Yearly</button>
+
+    <div id="root0"></div>
+    <div id="root1" class="hidden"></div>
     <script type="text/javascript">
       Subscription.init({
         apiUrl: "%REACT_APP_API_URL%",
-        apiKey: "%REACT_APP_API_KEY%",
-        element: document.getElementById('root'),
-        meta: ["test@test.com"]
+        apiKey: "%REACT_APP_API_KEY1%",
+        element: document.getElementById('root0'),
+        meta: ["123456"],
+        isLoggedIn: true
       })
     </script>
+
+    <script type="text/javascript">
+      Subscription.init({
+        apiUrl: "%REACT_APP_API_URL%",
+        apiKey: "%REACT_APP_API_KEY2%",
+        element: document.getElementById('root1'),
+        meta: ["123456"],
+        isLoggedIn: true
+      })
+    </script>
+
   </body>
 </html>
